@@ -8,7 +8,7 @@ describe ConnectFour do
 
     context 'when testing inputs from 1 to 7 as a string' do
       1.upto(7) do |n|
-        it "returns #{n} when the input is #{n} on an empty board" do
+        it "returns #{n} when the input is #{n}" do
           result = game_validation.validate_input(n.to_s)
           expect(result).to be(n)
         end
