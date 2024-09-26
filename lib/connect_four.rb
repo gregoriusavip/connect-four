@@ -11,6 +11,7 @@ class ConnectFour
 
   def player_input
     loop do
+      puts('Input a number from 1 to 7')
       input = gets.chomp
       validated_input = transform_input(input)
       validated_input.nil? ? puts("#{input} is not a valid input") : (return validated_input)
