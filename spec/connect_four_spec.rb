@@ -3,6 +3,30 @@
 require_relative '../lib/connect_four'
 
 describe ConnectFour do
+  describe '#player_input' do
+    subject(:game_input) { described_class.new }
+
+    context 'when the input is 42 then 4' do
+      let(:invalid_input) { '42' }
+      let(:valid_input) { '4' }
+
+      before do
+        allow(game_input).to receive(:gets).and_return(invalid_input, valid_input)
+        allow(game_input).to receive(:validate_input).and_return(nil, 4)
+      end
+
+      it 'returns 4 as an integer' do
+        result = game_input.player_input
+        expect(result).to eq(4)
+      end
+
+      it 'asks for user input twice' do
+        game_input.player_input
+        expect(game_input).to have_received(:gets).twice
+      end
+    end
+  end
+
   describe '#validate_input' do
     subject(:game_validation) { described_class.new }
 
