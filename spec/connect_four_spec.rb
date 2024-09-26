@@ -25,6 +25,25 @@ describe ConnectFour do
         expect(game_input).to have_received(:gets).twice
       end
     end
+
+    context 'when the input is 7' do
+      let(:valid_input) { '7' }
+
+      before do
+        allow(game_input).to receive(:gets).and_return(valid_input)
+        allow(game_input).to receive(:transform_input).and_return(7)
+      end
+
+      it 'returns 7 as an integer' do
+        result = game_input.player_input
+        expect(result).to eq(7)
+      end
+
+      it 'asks for user input once' do
+        game_input.player_input
+        expect(game_input).to have_received(:gets).once
+      end
+    end
   end
 
   describe '#transform_input' do
