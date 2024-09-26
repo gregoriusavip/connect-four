@@ -12,7 +12,7 @@ describe ConnectFour do
 
       before do
         allow(game_input).to receive(:gets).and_return(invalid_input, valid_input)
-        allow(game_input).to receive(:validate_input).and_return(nil, 4)
+        allow(game_input).to receive(:transform_input).and_return(nil, 4)
       end
 
       it 'returns 4 as an integer' do
@@ -33,7 +33,7 @@ describe ConnectFour do
     context 'when testing inputs from 1 to 7 as a string' do
       1.upto(7) do |n|
         it "returns #{n} when the input is #{n}" do
-          result = game_validation.validate_input(n.to_s)
+          result = game_validation.transform_input(n.to_s)
           expect(result).to be(n)
         end
       end
@@ -44,7 +44,7 @@ describe ConnectFour do
 
       out_of_range.each do |input|
         it "returns nil when the input is #{input}" do
-          result = game_validation.validate_input(input)
+          result = game_validation.transform_input(input)
           expect(result).to be_nil
         end
       end
@@ -56,7 +56,7 @@ describe ConnectFour do
 
       mixed_inputs.each do |input, value|
         it "returns #{value.inspect} when the input is #{input}" do
-          result = game_validation.validate_input(input)
+          result = game_validation.transform_input(input)
           expect(result).to be(value)
         end
       end
