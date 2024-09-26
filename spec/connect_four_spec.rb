@@ -27,7 +27,7 @@ describe ConnectFour do
     end
   end
 
-  describe '#validate_input' do
+  describe '#transform_input' do
     subject(:game_validation) { described_class.new }
 
     context 'when testing inputs from 1 to 7 as a string' do
