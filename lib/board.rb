@@ -2,7 +2,7 @@
 
 # row n by column m Connect Four board
 class Board
-  attr_reader :board
+  attr_reader :board, :last_move
 
   def initialize(row = 6, column = 7)
     @max_row = row
@@ -17,6 +17,7 @@ class Board
     cur_row -= 1 until board[cur_row][column - 1].nil? || cur_row.negative?
     return nil if cur_row.negative?
 
+    @last_move = [cur_row, column - 1]
     board[cur_row][column - 1] = piece
   end
 end

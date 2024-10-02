@@ -20,6 +20,15 @@ describe Board do
         expect(result).to be_nil
       end
 
+      it 'does not update last_move if the piece failed to be added' do
+        expect { empty_board.add_piece(:piece, max_column + 1) }.not_to(change(empty_board, :last_move))
+      end
+
+      it 'updates last_move if the piece is sucessfully added' do
+        column = 1
+        expect { empty_board.add_piece(:piece, column) }.to change(empty_board, :last_move).to [5, column - 1]
+      end
+
       it 'returns nil if the piece is added to a column less than 1' do
         result = empty_board.add_piece(:piece, 0) # out of range
         expect(result).to be_nil
