@@ -1,9 +1,12 @@
 # frozen-string-literal: true
 
+require_relative('board_checker')
+
 # row n by column m Connect Four board
 class Board
   attr_reader :board, :last_move
 
+  include BoardChecker
   def initialize(row = 6, column = 7)
     @max_row = row
     @max_column = column

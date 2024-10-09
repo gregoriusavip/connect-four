@@ -96,4 +96,77 @@ describe Board do
       end
     end
   end
+
+  describe '#check_winner' do
+    subject(:winner_game) { described_class.new }
+
+    context 'when no move has been done' do
+      it 'returns false' do
+        result = winner_game.check_winner(nil)
+        expect(result).to be false
+      end
+    end
+
+    context 'when last move contains no winning pattern' do
+      it 'returns false' do
+        winner_game.add_piece(:piece, 5)
+        result = winner_game.check_winner
+        expect(result).to be false
+      end
+    end
+
+    context 'when last move contains horizontal winning pattern' do
+      it 'returns true' do
+        1.upto(4) { |column| winner_game.add_piece(:piece, column) }
+        result = winner_game.check_winner
+        expect(result).to be true
+      end
+    end
+
+    context 'when last move contains vertical winning pattern' do
+      it 'returns true' do
+        4.times { winner_game.add_piece(:piece, 3) }
+        result = winner_game.check_winner
+        expect(result).to be true
+      end
+    end
+
+    context 'when last move contains diagonal right winning pattern' do
+      before do # create diagonal right winning pattern
+        win_piece = :win_piece
+        dud_piece = :dud_piece
+        1.upto(3) do |i|
+          i.times { winner_game.add_piece(dud_piece, i + 1) }
+        end
+        4.times { |i| winner_game.add_piece(win_piece, i + 1) }
+      end
+
+      it 'returns true' do
+        result = winner_game.check_winner
+        expect(result).to be true
+      end
+    end
+
+    context 'when last move contains diagonal left winning pattern' do
+      before do # create diagonal left winning pattern
+        win_piece = :win_piece
+        dud_piece = :dud_piece
+        column = 4
+        1.upto(3) do |i|
+          i.times { winner_game.add_piece(dud_piece, column) }
+          column -= 1
+        end
+        column = 5
+        4.times do
+          winner_game.add_piece(win_piece, column)
+          column -= 1
+        end
+      end
+
+      it 'returns true' do
+        result = winner_game.check_winner
+        expect(result).to be true
+      end
+    end
+  end
 end
