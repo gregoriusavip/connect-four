@@ -30,8 +30,7 @@ describe ConnectFour do
       let(:valid_input) { '7' }
 
       before do
-        allow(game_input).to receive(:gets).and_return(valid_input)
-        allow(game_input).to receive(:transform_input).and_return(7)
+        allow(game_input).to receive_messages(gets: valid_input, transform_input: 7)
       end
 
       it 'returns 7 as an integer' do
