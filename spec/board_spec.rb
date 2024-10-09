@@ -169,4 +169,42 @@ describe Board do
       end
     end
   end
+
+  describe '#tie?' do
+    context 'when the board is empty board' do
+      subject(:no_tie_board) { described_class.new }
+
+      it 'returns false' do
+        result = no_tie_board.tie?
+        expect(result).to be false
+      end
+    end
+
+    context 'when the board has no moves remaining' do
+      subject(:tie_board) { described_class.new }
+
+      before do # fill the board
+        dud_piece = :dud_piece
+        columns = 6
+        rows = 6
+        rows.times do |row|
+          columns.times { tie_board.add_piece(dud_piece, row + 1) }
+        end
+
+        (columns - 1).times { tie_board.add_piece(dud_piece, 7) }
+      end
+
+      it 'returns true if the last move contains no winning patter' do
+        tie_board.add_piece(:piece, 7)
+        result = tie_board.tie?
+        expect(result).to be true
+      end
+
+      it 'returns false if the last move contains a winning pattern' do
+        tie_board.add_piece(:dud_piece, 7)
+        result = tie_board.tie?
+        expect(result).to be false
+      end
+    end
+  end
 end

@@ -9,6 +9,10 @@ module BoardChecker
     check_horizontal || check_vertical || check_diagonal_right || check_diagonal_left
   end
 
+  def tie?
+    !check_winner && @board[0].all? { |piece| !piece.nil? }
+  end
+
   private
 
   def check_horizontal
