@@ -18,13 +18,6 @@ class ConnectFour
     end
   end
 
-  def transform_input(input)
-    return nil unless input.match?(/^\s*[1-9]+\s*$/)
-
-    input = input.to_i
-    input.between?(1, 7) ? input : nil
-  end
-
   def player_input
     loop do
       puts('Input a number from 1 to 7')
@@ -35,6 +28,13 @@ class ConnectFour
   end
 
   private
+
+  def transform_input(input)
+    return nil unless input.match?(/^\s*[1-9]+\s*$/)
+
+    input = input.to_i
+    input.between?(1, 7) ? input : nil
+  end
 
   def player_turn(player)
     puts "Player's #{player} turn"
