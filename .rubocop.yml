@@ -1,2 +1,5 @@
 require:
   - rubocop-rspec
+
+RSpec/SubjectStub:
+  Enabled: false
