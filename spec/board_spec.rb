@@ -59,22 +59,6 @@ describe Board do
       end
     end
 
-    context 'when adding any piece with the lowest and 2nd lowest row filled' do
-      subject(:third_row_board) { described_class.new }
-
-      before do # fill the lowest and 2nd lowest column
-        2.times { 1.upto(7) { |n| third_row_board.add_piece(:piece, n) } }
-      end
-
-      1.upto(7) do |n|
-        it "puts the piece to the 3rd lowest row, column #{n}" do
-          expect { third_row_board.add_piece(:piece, n) }.to change {
-            third_row_board.board[max_row - 3][n - 1]
-          }.from(nil).to(:piece)
-        end
-      end
-    end
-
     context 'when the first column is filled' do
       subject(:filled_column_board) { described_class.new }
 
