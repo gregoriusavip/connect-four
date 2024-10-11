@@ -11,6 +11,7 @@ describe ConnectFour do
 
     before do
       allow(end_board).to receive(:add_piece)
+      allow(end_board).to receive(:print_board)
       allow(game_ends).to receive(:player_input)
     end
 

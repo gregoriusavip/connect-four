@@ -23,4 +23,14 @@ class Board
     @last_move = [cur_row, column - 1]
     board[cur_row][column - 1] = piece
   end
+
+  def print_board
+    @board.each do |i|
+      i.each do |j|
+        j.nil? ? (print '_') : (print j)
+        print ' '
+      end
+      print "\n"
+    end
+  end
 end

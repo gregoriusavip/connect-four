@@ -13,9 +13,10 @@ class ConnectFour
     turn = 0
     loop do
       player = @players[turn % 2]
-      turn += 1 unless player_turn(player).nil?
+      player_turn(player).nil? ? (puts 'piece could not be added') : turn += 1
       break if game_over?(player)
     end
+    @board.print_board
   end
 
   def player_input
@@ -37,13 +38,14 @@ class ConnectFour
   end
 
   def player_turn(player)
+    @board.print_board
     puts "Player's #{player} turn"
     @board.add_piece(player, player_input)
   end
 
   def game_over?(player)
     if @board.check_winner
-      puts "Congratulations! #{player}"
+      puts "Congratulations! #{player}. You have won the game!"
       return true
     elsif @board.tie?
       puts "It's a tie!"
